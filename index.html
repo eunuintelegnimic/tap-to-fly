@@ -1,0 +1,502 @@
+<!DOCTYPE html><html><head><title>Click To Fly</title><meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui=1"><meta charset="UTF-8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content=""><link rel="manifest" href="manifest.json"><link rel="icon" type="image/png" href="icon64.png"><link rel="apple-touch-icon" sizes="180x180" href="icon180.png"><link rel="icon" type="image/png" sizes="32x32" href="icon32.png"><link rel="icon" type="image/png" sizes="16x16" href="icon16.png"><style>html,body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  overflow:hidden;
+  font-family: Verdana;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#canvaswrapper {
+  text-align: center ;
+}
+</style><style>@font-face { font-family: "BitCell" ; src: url("fonts/BitCell.ttf") format("truetype"); }</style><script>window.fonts = ["BitCell"]</script></head><body class="noselect custom-cursor" oncontextmenu="return false;"><div id="canvaswrapper"></div><script type="text/javascript">var resources = {"images":[{"file":"asteroid.png","version":1,"size":1402,"properties":{}},{"file":"back.png","version":1,"size":1018006,"properties":{}},{"file":"back2.png","version":1,"size":164626,"properties":{}},{"file":"icon.png","version":13,"size":280,"properties":{"frames":1,"fps":5}},{"file":"rocket.png","version":1,"size":267,"properties":{}},{"file":"sekiro.png","version":3,"size":105,"properties":{"frames":1,"fps":5}},{"file":"star.png","version":15,"size":261444,"properties":{"frames":8,"fps":5}}],"assets":[],"maps":{"map":"{\"width\":24,\"height\":16,\"block_width\":16,\"block_height\":16,\"sprites\":[0],\"data\":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}"},"sounds":[],"music":[]};
+var graphics = "M1";
+
+</script><script type="text/javascript">var orientation = 'any' ;
+var aspect = 'free' ;
+var ms_libs = [] ;
+window.skip_service_worker = true;
+window.exported_project = true;
+window.ms_use_server = false ;
+</script><script src="compiler.js"></script><script src="parser.js"></script><script src="processor.js"></script><script src="program.js"></script><script src="routine.js"></script><script src="runner.js"></script><script src="token.js"></script><script src="tokenizer.js"></script><script src="transpiler.js"></script><script src="microengine.js"></script></body><script type="text/javascript">//
+//
+// The game is started with the code below.
+// Once you have received the "started" signal (see below),
+// you can do the following:
+// 1) Inject functions or objects into the global context of the microStudio engine, example:
+//
+//   window.player.setGlobal("special_callback",function(x) { console.info(x) }) ;
+//   // Your microScript code can now call the "special_callback" function
+//
+// 2) Call microScript global functions from your JavaScript code, example:
+//
+//   window.player.call("call_me_from_javascript",[10,1000]) ;
+//   // arguments to the function call are provided as an array
+//
+// 3) Run a microScript code snippet from your JavaScript code, example:
+//
+//   window.player.exec("player.position_x = 50",function(result) { console.log(result) ; }) ;
+//
+
+window.addEventListener("load",function() {
+  window.player = new Player(function(event) {
+    if (event.name == "started") {
+      // signal that the game is started
+    }
+    else if (event.name == "log") {
+      // console.info(event.data) ;
+    }
+  }) ;
+  document.body.focus() ;
+}) ;
+
+</script><script id="code" type="text/x-microscript">
+
+
+function()
+//Welcome to the programming for this vector 2D library
+//All angles are in degrees unless specified otherwise
+//To use this class, code in: example = new vector2
+//use functions and variables inside the code by typing: example.function(paramaters)
+//All functions have comments as well as documentation explaining their purpose
+//Feel free to tweak any code where necessary
+
+vector2 = class
+  x = 0         //introduces the x and y variables
+  y = 0
+  
+  drawSpriteAtVector = function(sprite, width, height)
+    screen.drawSprite(sprite, x, y, width, height)    //draws the specified sprite at the vector with the specified width and height
+  end
+  
+  getAngle = function()
+    if y < 0 then
+      return(atand(x/y) + 180)
+    else
+      return(atand(x/y))
+    end                 //returns an angle based on the position of the vector
+  end
+  
+  getRad = function()
+    if y < 0 then
+      return(atan(x/y) + PI)
+    else
+      return(atan(x/y))
+    end     //returns an angle in radiens based on the position of the vector
+  end
+  
+  locate = function()   //Shows the location as a white cross on the screen, used for debugging
+    screen.fillRect(x, y, 40, 5, "#ffff")
+    screen.fillRect(x, y, 5, 40, "#ffff")
+    print("x = "+x+" y = "+y)
+  end
+  
+  rotate = function(angle)
+    local ang = getAngle()        //rotates the vector around the centre of the
+    local length = getLength()    //screen using an angle in degrees
+    ang += angle
+    x = 0
+    y = 0
+    moveWithAngle(ang, length)
+  end
+  
+  rotateRad = function(angle)
+    local ang = getRad()          //rotates the vector around the centre of the
+    local length = getLength()    //screen using an angle in radians
+    ang += angle
+    x = 0
+    y = 0
+    moveWithRad(ang, length)
+  end
+  
+  setVector = function(newX, newY)
+    x = newX            //sets the vector to a new x and y (does not keep the old values)
+    y = newY
+  end
+  
+  getLength = function()
+    return sqrt(pow(x, 2) + pow(y, 2))
+  end
+  
+  getVector = function()
+    return([x, y])      //this returns the x and y values as an array
+  end
+  
+  moveWithAngle = function(angle, distance)  //moves the vector the distance at the angle,
+    local disX = cosd(angle)                 //also returns the new location
+    local disY = sind(angle)
+    disX *= distance
+    disY *= distance
+    x += disX
+    y += disY
+    return([x, y])
+  end
+  
+  moveWithRad = function(angle, distance) //moves the vector the distance at the angle (in radiens),
+    local disX = cos(angle)               //also returns the new location
+    local disY = sin(angle)
+    disX *= distance
+    disY *= distance
+    x += disX
+    y += disY
+    return([x, y])
+  end
+  
+  moveWithVector = function(moveX, moveY)
+    x += moveX                            //moves the vector by inputting distances for the x and y values to move
+    y += moveY
+  end
+  
+  setAsAngle = function(angle)
+    x = cosd(90 - angle)     //sets the vector from an angle in degrees
+    y = sind(90 - angle)
+  end
+  
+  setAsRad = function(angle)
+    x = cos(PI/2 - angle)      //sets the vector from an angle in radiens
+    y = sin(PI/2 - angle)
+  end
+end
+end()
+
+
+
+function()
+createParallax = function()
+  local parallax = object
+    x = 0
+    y = 0
+    
+    planes = []
+    
+    add = function(sprite,size,y=0,z=2)
+      local plane = object
+        sprite = sprite
+        size = size
+        y = y
+        z = z
+      end
+      planes.push(plane)
+      plane
+    end
+    
+    fmod = function(x,y)
+      x-floor(x/y)*y
+    end
+    
+    draw = function()
+      for p in planes
+        local posx = fmod(-x/p.z,p.size)
+        local posy = p.y-y/p.z
+        local px = posx
+        while px-p.size/2<screen.width/2
+          screen.drawSprite(p.sprite,px,posy,p.size)
+          px += p.size
+        end
+        px = posx-p.size
+        while px+p.size/2>-screen.width/2
+          screen.drawSprite(p.sprite,px,posy,p.size)
+          px -= p.size
+        end
+      end
+    end
+  end
+  
+  
+end
+end()
+
+
+
+function()
+hit = function( x, y, obj_x, obj_y, obj_w, obj_h)
+  return abs( x-obj_x ) <= obj_w/2
+     and abs( y-obj_y ) <= obj_h/2
+end
+
+collision = function(x1,y1,w1,h1,x2,y2,w2,h2)
+  return abs(x1-x2) < (w1+w2)/2
+     and abs(y1-y2) < (h1+h2)/2
+end
+
+
+
+// map collisions
+
+if not screen.drawMap0.type then
+  screen.drawMap0 = screen.drawMap
+end
+
+screen.drawMap = function(map,x,y,w,h)
+  local m = map
+  if m.type == "string" then m = maps[m] end
+
+  m.screen_position = object
+    x = x
+    y = y
+    w = w
+    h = h
+  end
+  
+  screen.drawMap0(map,x,y,w,h)
+end
+
+mapHit = function( x, y, map )
+  if map.type == "string" then map = maps[map] end
+  
+  if not map then return 0 end
+  if not map.screen_position then return 0 end
+  
+  local pos = map.screen_position
+  
+  local mx = pos.x-pos.w/2
+  local my = pos.y-pos.h/2
+  
+  local dx = floor((x-mx)/pos.w*map.width)
+  local dy = floor((y-my)/pos.h*map.height)
+  
+  if dx >= 0 and dx < map.width and dy >= 0 and dy < map.height then
+    return map.get(dx,dy)
+  else
+    return 0
+  end
+end
+
+// sprite collisions
+screen.sprite_position_map = object
+    time = 0
+    map = object end
+  end
+
+if not screen.drawSprite0.type then
+  screen.drawSprite0 = screen.drawSprite
+end
+
+screen.drawSprite = function(sprite,x,y,w,h)
+  screen.drawSprite0(sprite,x,y,w,h)
+  
+  if sprite.type == "string" then
+    local map = screen.sprite_position_map
+    if system.time() > map.time then
+      map.time = system.time()+8
+      map.map = object end
+    end
+      
+    local pos = map.map[sprite]
+    if not pos then
+      pos = map.map[sprite] = []
+    end
+    pos.push(object
+      x = x
+      y = y
+      w = w
+      h = h
+    end)
+  end
+end
+
+spriteHit = function( x, y, name )
+  local map = screen.sprite_position_map
+  local list = map.map[name]
+  if list then
+    for s in list
+      if abs( s.x - x ) < s.w/2 and abs( s.y - y ) < s.h/2 then
+        return s
+      end
+    end
+  end
+  
+  return 0
+end
+
+spriteCollision = function( sprite1, sprite2 )
+  local map = screen.sprite_position_map
+  local list1 = map.map[sprite1]
+  local list2 = map.map[sprite2]
+  if list1 and list2 then
+    for s1 in list1
+      for s2 in list2
+        if s1 != s2 and abs(s1.x-s2.x) < (s1.w+s2.w)/2 and abs(s1.y-s2.y) < (s1.h+s2.h)/2 then
+          return [s1,s2]
+        end
+      end
+    end
+  end
+  
+  return 0
+end
+
+spriteCollisionList = function( sprite1, sprite2 )
+  local map = screen.sprite_position_map
+  local list1 = map.map[sprite1]
+  local list2 = map.map[sprite2]
+  local result = []
+  if list1 and list2 then
+    for s1 in list1
+      for s2 in list2
+        if s1 != s2 and abs(s1.x-s2.x) < (s1.w+s2.w)/2 and abs(s1.y-s2.y) < (s1.h+s2.h)/2 then
+          result.push([s1,s2])
+        end
+      end
+    end
+  end
+  
+  return result
+end
+
+
+end()
+
+
+
+function()
+//Random Extended by Mythril
+//https://microstudio.dev/i/Mythril/randomextended/
+
+//Returns a random color code.
+random.color = function()
+  local color = "rgb("
+  color += random.nextInt(256) + ","
+  color += random.nextInt(256) + ","
+  color += random.nextInt(256) + ")"
+  return color
+end
+
+//Returns a random color code from the ranges you gave.
+random.colorRGB = function(rMin=0,rMax=255,gMin=0,gMax=255,bMin=0,bMax=255)
+  local color = "rgb("
+  color += random.intInRange(rMin,rMax) + ","
+  color += random.intInRange(gMin,gMax) + ","
+  color += random.intInRange(bMin,bMax) + ")"
+  return color
+end
+
+
+//Returns a random float number from the range you gave.
+random.floatInRange = function(MIN,MAX)
+  return random.next() * (MAX - MIN + 1) + MIN
+end
+
+//Returns a random integer from the range you gave.
+random.intInRange = function(MIN,MAX)
+  return floor(random.next() * (floor(MAX) - ceil(MIN) + 1) + ceil(MIN))
+end
+
+//Returns a random character from the string you gave.
+random.stringCharacter = function(string)
+  local character = random.nextInt(string.length)
+  return string[character]
+end
+
+//Returns a random item from the list you gave.
+random.listItem = function(list)
+  local item = random.nextInt(list.length)
+  return list[item]
+end
+end()
+
+
+
+function()
+init = function()
+  score = 0
+  size = 18
+  a = 0
+  
+  halfHS = screen.height/2 - size/2
+  halfWS = screen.width/2 - size/2
+  
+  parallax = createParallax()
+  parallax.add("back", 400, 1)
+  
+  rocket = new vector2
+  rocket.setVector(0, 0)
+  
+  back = new vector2
+  back.setVector(0, 0)
+  
+  star = new vector2
+  star.setVector(random.intInRange(-halfWS, halfWS), random.intInRange(-halfHS, halfHS))
+  
+  asteroids = []
+  
+  asteroids[0] = new vector2
+  asteroids[0].setVector(random.intInRange(-halfWS, halfWS), random.intInRange(-halfHS, halfHS))
+  
+end
+
+update = function()
+  halfHS = screen.height/2 - size/2
+  halfWS = screen.width/2 - size/2
+  
+  if touch.touching then
+    local tx = rocket.x
+    local ty = rocket.y
+    
+    rocket.moveWithAngle(a + 90, 1)
+    //back.moveWithAngle(a + 90, -1)
+    parallax.x = rocket.x
+    parallax.y = rocket.y
+    
+    if rocket.y >= halfHS or rocket.y <= -halfHS then 
+      rocket.y = ty
+    end
+    if rocket.x >= halfWS or rocket.x <= -halfWS then 
+      rocket.x = tx
+    end
+  elsif not touch.touching and a >= 359 then
+    a = 0
+  else 
+    a += 1 
+  end
+  
+  if collision(star.x, star.y, size/2, size/2, rocket.x, rocket.y, size, size) then
+    star.setVector(random.intInRange(-halfWS, halfWS), random.intInRange(-halfHS, halfHS))
+    score += 1
+    
+    local t = new vector2
+    asteroids.push(t)
+    
+    for i = 0 to asteroids.length - 1
+      asteroids[i].setVector(random.intInRange(-halfWS, halfWS), random.intInRange(-halfHS, halfHS))
+    end
+    
+  end
+  
+  for i = 0 to asteroids.length - 1
+    if collision(asteroids[i].x, asteroids[i].y, size, size, rocket.x, rocket.y, size, size) then
+      init()
+    end
+  end
+  
+end
+
+draw = function()
+  screen.clear()
+  
+  screen.setDrawRotation(0)
+  
+  parallax.draw()
+
+  star.drawSpriteAtVector("star", size/2)
+  
+  for i = 0 to asteroids.length - 1 
+    asteroids[i].drawSpriteAtVector("asteroid", size, size)
+  end
+  
+  screen.drawText("Score: " + score, -halfWS+25,halfHS size,"rgb(147,130,130)")
+  
+  screen.setDrawRotation(a)
+  rocket.drawSpriteAtVector("rocket", size)
+end
+end()
+
+
+</script></html>
